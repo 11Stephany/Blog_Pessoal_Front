@@ -1,6 +1,7 @@
 import React from 'react';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
 import { Box, Grid } from '@mui/material';
+import { Link } from 'react-router-dom';
 import './Navbar.css';
 
 function Navbar() {
@@ -15,31 +16,33 @@ function Navbar() {
                             </Typography>
                         </Box>
                         <Box display="flex" justifyContent="start">
-                            <Box mx={1} style={{ cursor: 'pointer' }}>                                
-                                    <Typography variant="h6" color="inherit">
-                                        Home
-                                    </Typography>                              
+                            <Box mx={1} style={{ cursor: 'pointer' }}>
+                                <Typography variant="h6" color="inherit">
+                                    Home
+                                </Typography>
                             </Box>
-                            <Box mx={1} style={{ cursor: 'pointer' }}>                                
-                                    <Typography variant="h6" color="inherit">
-                                        Postagens
-                                    </Typography>                                
+                            <Box mx={1} style={{ cursor: 'pointer' }}>
+                                <Typography variant="h6" color="inherit">
+                                    Postagens
+                                </Typography>
                             </Box>
-                            <Box mx={1} style={{ cursor: 'pointer' }}>                                
-                                    <Typography variant="h6" color="inherit">
-                                        Temas
-                                    </Typography>                                
+                            <Box mx={1} style={{ cursor: 'pointer' }}>
+                                <Typography variant="h6" color="inherit">
+                                    Temas
+                                </Typography>
                             </Box>
                             <Box mx={1} style={{ cursor: 'pointer' }}>
                                 <Typography variant="h6" color="inherit">
                                     Cadastrar tema
                                 </Typography>
                             </Box>
-                            <Box mx={1} style={{ cursor: 'pointer' }}>                                
+                            <Link to='/login' className='text-decorator-none'>
+                                <Box mx={1} style={{ cursor: 'pointer', color: "white" }} >
                                     <Typography variant="h6" color="inherit">
                                         logout
-                                    </Typography>                                
-                            </Box>
+                                    </Typography>
+                                </Box>
+                            </Link>
                         </Box>
                     </Grid>
                 </Toolbar>
