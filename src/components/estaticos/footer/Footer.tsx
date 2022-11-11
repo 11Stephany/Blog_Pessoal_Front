@@ -3,45 +3,46 @@ import React from 'react';
 import { FacebookRounded } from '@mui/icons-material';
 import { Instagram, LinkedIn } from '@material-ui/icons';
 import GitHub from '@mui/icons-material/GitHub'
+import './Footer.css';
 
 function Footer() {
     return (
         <>
             <Grid container direction="row" justifyContent="center" alignItems="center">
                 <Grid alignItems="center" item xs={12}>
-                    <Box style={{ backgroundColor: '#3F51B5', height: '120px' }}>
+                    <Box className="box1">
                         <Box paddingTop={1} display="flex" alignItems="center" justifyContent="center">
-                            <Typography variant="h5" align="center" gutterBottom style={{ color: 'white' }}>
+                            <Typography variant="h5" align="center" gutterBottom className="textos" >
                                 Siga-nos nas redes sociais{' '}
                             </Typography>
                         </Box>
                         <Box display="flex" alignItems="center" justifyContent="center">
                             <a href="https://www.facebook.com" target="_blank">
-                                <FacebookRounded style={{ fontSize: 60, color: 'white' }} />
+                                <FacebookRounded className="redes" />
                             </a>
                             <a href="https://www.instagram.com" target="_blank">
-                                <Instagram style={{ fontSize: 60, color: 'white' }} />
+                                <Instagram className="redes"  />
                             </a>
                             <a href="https://www.github.com/tjfaccipieri" target="_blank">
-                                <GitHub style={{ fontSize: 60, color: 'white' }} />
+                                <GitHub className="redes"  />
                             </a>
                             <a
                                 href="https://www.linkedin.com/in/thiago-faccipieri/"
                                 target="_blank"
                             >
-                                <LinkedIn style={{ fontSize: 60, color: 'white' }} />
+                                <LinkedIn className="redes" />
                             </a>
                         </Box>
                     </Box>
-                    <Box style={{ backgroundColor: '#303F9F', height: '60px' }}>
+                    <Box className="box2" >
                         <Box paddingTop={1}>
-                            <Typography variant="subtitle2" align="center" gutterBottom style={{ color: 'white' }}>
+                            <Typography variant="subtitle2" align="center" gutterBottom className="textos">
                                 © 2022 Copyright:
                             </Typography>
                         </Box>
                         <Box>
                             <a target="_blank" href="https://brasil.generation.org">
-                                <Typography variant="subtitle2" gutterBottom style={{ color: 'white' }} align="center">
+                                <Typography variant="subtitle2" gutterBottom className="textos" align="center">
                                     brasil.generation.org
                                 </Typography>
                             </a>
