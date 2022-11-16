@@ -1,13 +1,70 @@
-import { Typography } from '@material-ui/core';
-import { Link } from 'react-router-dom';
-import { Grid, Box, Button, TextField } from '@mui/material';
+import { Box, Button, Grid, TextField } from '@mui/material';
+import React, { ChangeEvent, useState, useEffect } from 'react';
 import './CadastroUsuario.css';
-import React from 'react';
+import { Typography } from '@material-ui/core';
+import { Link, useNavigate } from 'react-router-dom';
+import User from '../../models/User';
+import { cadastroUsuario } from '../../service/Service';
 
 
 function CadastroUsuario() {
-    return (
 
+    let history = useNavigate();
+
+    const [confirmarSenha, setConfirmarSenha] = useState<string>('');
+
+    function confirmarSenhaHandle(e: ChangeEvent<HTMLInputElement>) {
+        setConfirmarSenha(e.target.value);
+    }
+
+    const [user, setUser] = useState<User>({
+        id: 0,
+        nome: '',
+        usuario: '',
+        senha: '',
+        foto: '',
+    });
+
+    const [userResult, setUserResult] = useState<User>({
+        id: 0,
+        nome: '',
+        usuario: '',
+        senha: '',
+        foto: '',
+    });
+
+    function updateModel(event: ChangeEvent<HTMLInputElement>) {
+        setUser({
+            ...user,
+            [event.target.name]: event.target.value,
+        });
+    }
+
+    async function cadastrar(event: ChangeEvent<HTMLFormElement>) {
+        event.preventDefault();
+
+        if (confirmarSenha === user.senha && user.senha.length >= 3) {
+
+            try {
+                await cadastroUsuario('/usuarios/cadastrar', user, setUserResult);
+                alert('Usuário cadastrado com sucesso'); 
+            } catch (error) {
+                alert('Falha interna ao cadastrar'); 
+            }
+        } else {
+            alert('As senhas não conferem. Favor verificar novamente');
+            setUser({ ...user, senha: '' }); 
+            setConfirmarSenha('');
+        }
+    }
+
+    useEffect(() => {
+        if (userResult.id !== 0) {
+            history('/login');
+        }
+    }, [userResult]);
+
+    return (
         <Grid container alignItems="center">
             <Grid item xs={6} className='imagem2'></Grid>
             <Grid item xs={6} display="flex" justifyContent="center">
