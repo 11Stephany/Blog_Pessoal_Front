@@ -10,17 +10,21 @@ function Navbar() {
             <AppBar position="static">
                 <Toolbar variant="dense">
                     <Grid container justifyContent="space-between" >
-                        <Box className="cursor">
-                            <Typography variant="h5" color="inherit">
-                                Blog Pessoal
-                            </Typography>
-                        </Box>
-                        <Box display="flex" justifyContent="start">
-                            <Box mx={1} className="cursor">
-                                <Typography variant="h6" color="inherit">
-                                    Home
+                        <Link to='/' className='text-decorator-none'>
+                            <Box className="cursor">
+                                <Typography variant="h5" color="inherit">
+                                    Blog Pessoal
                                 </Typography>
                             </Box>
+                        </Link>
+                        <Box display="flex" justifyContent="start">
+                            <Link to='/' className='text-decorator-none'>
+                                <Box mx={1} className="cursor">
+                                    <Typography variant="h6" color="inherit">
+                                        Home
+                                    </Typography>
+                                </Box>
+                            </Link>
                             <Box mx={1} className="cursor">
                                 <Typography variant="h6" color="inherit">
                                     Postagens

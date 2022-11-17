@@ -1,6 +1,7 @@
 import { Grid, Box, Typography, TextField, Button } from '@mui/material';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import useLocalStorage from 'react-use-localstorage';
 import UserLogin from '../../models/UserLogin';
 import { login } from '../../service/Service';
@@ -11,11 +12,24 @@ function Login() {
     const [userLogin, setUserLogin] = useState<UserLogin>(
         {
             id: 0,
+            nome: '',
             usuario: '',
             senha: '',
-            token: ''
+            foto: '',
+            token: '',
         }
-    )
+    );
+
+    const [respUserLogin, setRespUserLogin] = useState<UserLogin>(
+        {
+            id: 0,
+            nome: '',
+            usuario: '',
+            senha: '',
+            foto: '',
+            token: '',
+        }
+    );
 
     let history = useNavigate();
 
@@ -31,8 +45,17 @@ function Login() {
     async function logar(event: ChangeEvent<HTMLFormElement>) {
         event.preventDefault();
         try {
-            await login('/usuarios/logar', userLogin, setToken);
-            alert('Usuário logado com sucesso');
+            await login('/usuario/logar', userLogin, setRespUserLogin);
+            toast.info('Usuário logado com sucesso', {
+                position: "top-right",
+                autoClose: 2500,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            });
         } catch (error) {
             alert('Dados de usuário incorretos');
         }
@@ -43,6 +66,12 @@ function Login() {
             history('/home');
         }
     }, [token]);
+
+    useEffect(() => {
+        if (respUserLogin.token !== '') {
+            history('/home')
+        }
+    }, [respUserLogin.token])
 
     return (
         <Grid container direction='row' justify-content='center' alignItems='center' >
@@ -62,7 +91,7 @@ function Login() {
                         <Box marginRight={1}>
                             <Typography variant='subtitle1' gutterBottom align='center'>Não tem uma conta?</Typography>
                         </Box>
-                        <Link to='/cadastrousuario'>
+                        <Link to='/login'>
                             <Typography variant='subtitle1' gutterBottom align='center' className="textos1">Cadastre-se</Typography>
                         </Link>
                     </Box>

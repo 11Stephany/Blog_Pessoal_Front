@@ -46,14 +46,14 @@ function CadastroUsuario() {
         if (confirmarSenha === user.senha && user.senha.length >= 3) {
 
             try {
-                await cadastroUsuario('/usuarios/cadastrar', user, setUserResult);
-                alert('Usuário cadastrado com sucesso'); 
+                await cadastroUsuario('/usuario/cadastrar', user, setUserResult);
+                alert('Usuário cadastrado com sucesso');
             } catch (error) {
-                alert('Falha interna ao cadastrar'); 
+                alert('Falha interna ao cadastrar');
             }
         } else {
             alert('As senhas não conferem. Favor verificar novamente');
-            setUser({ ...user, senha: '' }); 
+            setUser({ ...user, senha: '' });
             setConfirmarSenha('');
         }
     }
@@ -70,11 +70,63 @@ function CadastroUsuario() {
             <Grid item xs={6} display="flex" justifyContent="center">
                 <Box paddingX={10}>
                     <Typography variant='h3' gutterBottom color='textPrimary' component='h3' align='center' className="textos2"> Cadastrar</Typography>
-                    <form>
-                        <TextField id='nome' label='nome' variant='outlined' name='nome' margin='normal' fullWidth />
-                        <TextField id='usuario' label='usuário' variant='outlined' name='usuario' margin='normal' fullWidth />
-                        <TextField id='senha' label='senha' variant='outlined' name='senha' margin='normal' type='password' fullWidth />
-                        <TextField id='confirmarSenha' label='confirmar senha' variant='outlined' name='confirmarSenha' margin='normal' type='password' fullWidth />
+                    <form onSubmit={cadastrar}>
+                        <TextField
+                            value={user.nome}
+                            onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                                updateModel(event)
+                            }
+                            name="nome"
+                            label="Nome completo"
+                            fullWidth
+                            margin="normal"
+                            required
+                        />
+                        <TextField
+                            value={user.usuario}
+                            onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                                updateModel(event)
+                            }
+                            name="usuario"
+                            label="Usuario (e-mail)"
+                            fullWidth
+                            margin="normal"
+                            // torna o campo obrigatorio para preenchimento
+                            required
+                            // coloca uma mensagem de ajuda ao usuário
+                            placeholder='digite um e-mail valido'
+                        />
+                        <TextField
+                            value={user.foto}
+                            onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                                updateModel(event)
+                            }
+                            name="foto"
+                            label="URL da foto"
+                            fullWidth
+                            margin="normal"
+                        />
+                        <TextField
+                            value={user.senha}
+                            onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                                updateModel(event)
+                            }
+                            name="senha"
+                            label="Senha"
+                            fullWidth
+                            margin="normal"
+                            placeholder='Digite pelo menos 8 caracteres'
+                        />
+                        <TextField
+                            value={confirmarSenha}
+                            onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                                confirmarSenhaHandle(event)
+                            }
+                            name="confirmSenha"
+                            label="Confirmar senha"
+                            fullWidth
+                            margin="normal"
+                        />
                         <Box marginTop={2} textAlign='center'>
                             <Link to='/login' className='text-decorator-none'>
                                 <Button variant='contained' color='secondary' className='botaoCancelar'>
